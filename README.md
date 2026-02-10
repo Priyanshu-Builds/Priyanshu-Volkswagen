@@ -1,0 +1,1 @@
+This repository contains programs created as part of practice and assignments.
