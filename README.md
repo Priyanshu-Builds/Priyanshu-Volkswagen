@@ -1,3 +1,3 @@
-# Priyanshu Volkswagen Python Assignments 🚀
+# Priyanshu Volkswagen Assignments
 
-This repository contains assignment programs done during training.
+This repository contains assignments done during training.
