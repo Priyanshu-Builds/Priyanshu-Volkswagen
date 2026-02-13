@@ -1,3 +1,3 @@
 # Priyanshu Volkswagen Assignments
 
-This repository contains assignments done during training.
+This repository contains Lab Assignments done during training.
