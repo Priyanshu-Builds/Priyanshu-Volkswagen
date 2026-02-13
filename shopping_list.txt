@@ -1,0 +1,6 @@
+Egg,1
+Milk,2
+Water bottle,2
+Earphone,5
+Desktop,8
+Cable,6
