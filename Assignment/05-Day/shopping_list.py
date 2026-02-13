@@ -1,3 +1,6 @@
+# Name: -> Priyanshu
+# Program: Command line Shopping List app with file persistence and quantity support
+
 import os
 
 class ShoppingList:
