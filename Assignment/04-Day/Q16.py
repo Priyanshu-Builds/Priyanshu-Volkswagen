@@ -1,6 +1,9 @@
-lst = [1, 2, 3, 4]
-tup = (5, 6, 7, 8)
+n = int(input("How many numbers you want to enter? => "))
+nums = []
 
-result = list(map(str, lst + list(tup)))
+for i in range(n):
+    nums.append(int(input(f"Enter number {i+1}: ")))
 
-print("Converted list of strings:", result)
+result = list(map(lambda x: x * 2, nums))
+
+print("Numbers after doubling:", result)

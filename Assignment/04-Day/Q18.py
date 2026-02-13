@@ -1,27 +1,29 @@
-text = input("Enter a string: ")
+import math
 
-print("A. Characters from even position")
-print("B. Characters from odd position")
-print("C. Length of string")
-print("D. Add 'a' at end of string length times")
+def circle(r):
+    print("Area:", math.pi * r * r)
+    print("Perimeter:", 2 * math.pi * r)
 
-choice = input("Enter your choice: ")
-choice = choice.upper()
+def square(a):
+    print("Area:", a * a)
+    print("Perimeter:", 4 * a)
 
-if choice == 'A':
-    print("Characters from even positions are:")
-    print(text[1::2])
+def rectangle(l, b):
+    print("Area:", l * b)
+    print("Perimeter:", 2 * (l + b))
 
-elif choice == 'B':
-    print("Characters from odd positions are:")
-    print(text[0::2])
+print("1. Circle\n2. Square\n3. Rectangle")
+choice = int(input("Enter your choice: "))
 
-elif choice == 'C':
-    print("Length of the string is:", len(text))
+if choice == 1:
+    r = float(input("Enter radius: "))
+    circle(r)
 
-elif choice == 'D':
-    print("Updated string is:")
-    print(text + "a" * len(text))
+elif choice == 2:
+    a = float(input("Enter side: "))
+    square(a)
 
-else:
-    print("Invalid choice entered.")
+elif choice == 3:
+    l = float(input("Enter length: "))
+    b = float(input("Enter breadth: "))
+    rectangle(l, b)
