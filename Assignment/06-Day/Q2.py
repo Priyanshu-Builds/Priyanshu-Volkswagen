@@ -83,10 +83,10 @@ class DeveloperIntern(Developer, Intern):
 
 def main():
 
-    m1 = Manager(101, "Anand", "Project Manager", "01-01-2024", "ABC")
-    h1 = HR(102, "Sam", "HR Executive", "01-02-2026", "Volkswagen")
-    d1 = Developer(103, "Priyanshu", "Software Developer", "21-11-2025", "VIT")
-    i1 = Intern(104, "Piyush", "Intern", "15-01-2026", "Startup")
+    m1 = Manager(1, "Anand", "Project Manager", "01-01-2024", "ABC")
+    h1 = HR(2, "Sam", "HR Executive", "01-02-2026", "Volkswagen")
+    d1 = Developer(3, "Priyanshu", "Software Developer", "21-11-2025", "VIT")
+    i1 = Intern(4, "Piyush", "Intern", "15-01-2026", "Startup")
 
     employees = [m1, h1, d1, i1]
 
@@ -99,7 +99,7 @@ def main():
     m1.access_financials()
     h1.access_policy()
 
-    mh = ManagerHR(105, "Riya", "ManagerHR", "01-05-2024", "Volkswagen")
+    mh = ManagerHR(5, "Riya", "ManagerHR", "01-05-2024", "Volkswagen")
     mh.access_all_confidential()
 
 
