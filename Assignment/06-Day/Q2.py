@@ -99,7 +99,7 @@ def main():
     m1.access_financials()
     h1.access_policy()
 
-    mh = ManagerHR(105, "Riya", "ManagerHR", "01-05-2024", "GlobalTech")
+    mh = ManagerHR(105, "Riya", "ManagerHR", "01-05-2024", "Volkswagen")
     mh.access_all_confidential()
 
 
