@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <title>VW Vehicle Monitoring Panel</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <header class="navbar">
+        <h2>Volkswagen - Vehicle Monitoring Panel</h2>
+        <button onclick="toggleTheme()" id="themeBtn">Dark Mode</button>
+    </header>
+
+    <section class="container">
+        <div class="sidebar">
+            <h3>Select Vehicle</h3>
+
+            <select id="vehicleSelect" onchange="changeVehicle()">
+                <option value="Polo">Polo</option>
+                <option value="Virtus">Virtus</option>
+                <option value="Taigun">Taigun</option>
+            </select>
+
+            <button onclick="manualRefresh()">Refresh Data</button>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <h4>Engine Temperature</h4>
+                <p id="temp">-- °C</p>
+            </div>
+
+            <div class="card">
+                <h4>Battery Voltage</h4>
+                <p id="voltage">-- V</p>
+            </div>
+
+            <div class="card">
+                <h4>Speed</h4>
+                <p id="speed">-- km/h</p>
+            </div>
+
+            <div class="card">
+                <h4>Status</h4>
+                <p id="status">Healthy</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>Internal Demo Project | Vehicle Systems</footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
