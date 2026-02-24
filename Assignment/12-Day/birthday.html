@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Birthday Surprise</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #f5d6b4, #e7a98c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+        }
+
+        h4 {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        #message {
+            font-size: 22px;
+            transition: 0.3s;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 22px;
+            margin: 8px;
+            border: none;
+            border-radius: 8px;
+            background-color: #ff3f6c;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #d81b60;
+            transform: scale(1.05);
+        }
+
+        .birthday-style {
+            font-size: 75px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff0066, #6600ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            animation: pop 0.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.08);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: 0;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h4>There is a message for you!!</h4>
+
+        <p id="message">wait..</p>
+
+        <div class="buttons">
+            <button onclick="showMessage()">Click here to get it!</button>
+            <button onclick="resetMessage()">Reset</button>
+        </div>
+
+    </div>
+
+    <script>
+
+        let clickCount = 0;
+        let size = 22;
+
+        function showMessage() {
+
+            clickCount++;
+            let para = document.getElementById("message");
+
+            if (clickCount < 4) {
+
+                size += 20;
+                para.style.fontSize = size + "px";
+                para.style.color = getRandomColor();
+                para.innerText = "Something special is coming...";
+
+            } else {
+
+                para.innerText = "🎉 Happy Birthday 🎉";
+                para.className = "birthday-style";
+                createConfetti();
+            }
+        }
+
+        function resetMessage() {
+
+            clickCount = 0;
+            size = 22;
+
+            let para = document.getElementById("message");
+
+            para.innerText = "wait..";
+            para.style = "";
+            para.className = "";
+
+            removeConfetti();
+        }
+
+        function getRandomColor() {
+
+            let letters = "0123456789ABCDEF";
+            let color = "#";
+
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+
+            return color;
+        }
+
+        function createConfetti() {
+
+            for (let i = 0; i < 40; i++) {
+
+                let conf = document.createElement("div");
+                conf.className = "confetti";
+
+                conf.style.left = Math.random() * 100 + "vw";
+                conf.style.backgroundColor = getRandomColor();
+                conf.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+                document.body.appendChild(conf);
+            }
+        }
+
+        function removeConfetti() {
+
+            let confetti = document.querySelectorAll(".confetti");
+            confetti.forEach(c => c.remove());
+        }
+
+    </script>
+
+</body>
+
+</html>

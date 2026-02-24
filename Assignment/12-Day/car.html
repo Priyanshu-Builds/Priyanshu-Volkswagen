@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Car Simulation</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to top, #2c3e50 40%, #4ca1af 100%);
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .road {
+            width: 900px;
+            height: 220px;
+            background: #3a3a3a;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+
+        .lane {
+            position: absolute;
+            top: 108px;
+            width: 100%;
+            height: 6px;
+            background: repeating-linear-gradient(to right,
+                    white 0,
+                    white 50px,
+                    transparent 50px,
+                    transparent 100px);
+        }
+
+        #car {
+            width: 180px;
+            position: absolute;
+            bottom: 20px;
+            left: 0px;
+            transition: left 0.1s linear;
+            filter: drop-shadow(0 15px 10px rgba(0, 0, 0, 0.6));
+        }
+
+        .controls button {
+            padding: 12px 25px;
+            margin: 8px;
+            font-size: 14px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #ff512f, #dd2476);
+            color: white;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .controls button:hover {
+            transform: translateY(-3px);
+        }
+
+        .speed {
+            margin-top: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Car Simulation</h2>
+
+        <div class="road">
+            <div class="lane"></div>
+            <img id="car" src="car.png">
+        </div>
+
+        <div class="controls">
+            <button onclick="accelerate()">Accelerate</button>
+            <button onclick="brake()">Brake</button>
+            <button onclick="moveForward()">Move Forward</button>
+            <button onclick="resetCar()">Reset</button>
+        </div>
+
+        <div class="speed">
+            Speed: <span id="speedValue">0</span> km/h
+        </div>
+
+    </div>
+
+    <script>
+
+        let speed = 0;
+        let position = 0;
+        let interval;
+        const car = document.getElementById("car");
+        const speedDisplay = document.getElementById("speedValue");
+
+        function moveForward() {
+            position += 60;
+
+            if (position > 720) {
+                position = 720;
+            }
+
+            car.style.left = position + "px";
+        }
+
+        function accelerate() {
+            clearInterval(interval);
+
+            interval = setInterval(() => {
+
+                if (speed < 120) speed += 5;
+
+                position += speed / 15;
+
+                if (position >= 720) {
+                    position = 720;
+                    clearInterval(interval);
+                }
+
+                car.style.left = position + "px";
+                speedDisplay.innerText = speed;
+
+            }, 100);
+        }
+
+        function brake() {
+            clearInterval(interval);
+            speed = 0;
+            speedDisplay.innerText = speed;
+        }
+
+        function resetCar() {
+            clearInterval(interval);
+            speed = 0;
+            position = 0;
+
+            car.style.left = "0px";
+            speedDisplay.innerText = speed;
+        }
+
+    </script>
+
+</body>
+
+</html>

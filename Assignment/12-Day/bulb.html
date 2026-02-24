@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bulb Control</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+            background: linear-gradient(to right, #d3cce3, #e9e4f0);
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        img {
+            width: 150px;
+            transition: 0.3s;
+        }
+
+        .glow {
+            filter: drop-shadow(0 0 20px yellow);
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            background-color: #4caf50;
+            color: white;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #388e3c;
+        }
+
+        #status {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Bulb Light Control</h2>
+
+        <img id="bulb" src="https://www.w3schools.com/js/pic_bulboff.gif">
+
+        <div>
+            <button onclick="turnOn()">Turn On</button>
+            <button onclick="turnOff()">Turn Off</button>
+            <button onclick="resetBulb()">Reset</button>
+        </div>
+
+        <p id="status">Status: OFF</p>
+
+    </div>
+
+    <script>
+
+        function turnOn() {
+            let bulb = document.getElementById("bulb");
+            bulb.src = "https://www.w3schools.com/js/pic_bulbon.gif";
+            bulb.classList.add("glow");
+
+            document.getElementById("status").innerText = "Status: ON";
+        }
+
+        function turnOff() {
+            let bulb = document.getElementById("bulb");
+            bulb.src = "https://www.w3schools.com/js/pic_bulboff.gif";
+            bulb.classList.remove("glow");
+
+            document.getElementById("status").innerText = "Status: OFF";
+        }
+
+        function resetBulb() {
+            turnOff();
+        }
+
+    </script>
+
+</body>
+
+</html>
