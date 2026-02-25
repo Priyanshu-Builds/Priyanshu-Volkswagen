@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Car Collision Simulation</title>
+</head>
+
+<body>
+
+    <script>
+
+        document.body.style.margin = "0";
+        document.body.style.overflow = "hidden";
+        document.body.style.background = "linear-gradient(to top, #1f2c3a, #4ca1af)";
+        document.body.style.fontFamily = "Arial";
+        document.body.style.height = "100vh";
+
+        let title = document.createElement("h1");
+        title.innerText = "Car Collision Simulation";
+        title.style.color = "white";
+        title.style.textAlign = "center";
+        title.style.marginTop = "20px";
+        document.body.appendChild(title);
+
+        let road = document.createElement("div");
+        road.style.position = "absolute";
+        road.style.bottom = "380px";
+        road.style.width = "100%";
+        road.style.height = "200px";
+        road.style.background = "#2e2e2e";
+        document.body.appendChild(road);
+
+        let divider = document.createElement("div");
+        divider.style.position = "absolute";
+        divider.style.top = "95px";
+        divider.style.width = "100%";
+        divider.style.height = "6px";
+        divider.style.background = "white";
+        road.appendChild(divider);
+
+        let car1 = document.createElement("img");
+        car1.src = "car1.png";
+        car1.style.position = "absolute";
+        car1.style.width = "180px";
+        car1.style.bottom = "400px";
+        car1.style.left = "0px";
+        document.body.appendChild(car1);
+
+        let car2 = document.createElement("img");
+        car2.src = "car2.png";
+        car2.style.position = "absolute";
+        car2.style.width = "180px";
+        car2.style.bottom = "400px";
+        car2.style.right = "0px";
+        document.body.appendChild(car2);
+
+        function createButton(text, leftPos) {
+            let btn = document.createElement("button");
+            btn.innerText = text;
+            btn.style.position = "absolute";
+            btn.style.bottom = "120px";
+            btn.style.left = leftPos;
+            btn.style.padding = "12px 25px";
+            btn.style.border = "none";
+            btn.style.borderRadius = "25px";
+            btn.style.background = "linear-gradient(45deg, #ff512f, #dd2476)";
+            btn.style.color = "white";
+            btn.style.fontSize = "15px";
+            btn.style.cursor = "pointer";
+            btn.style.boxShadow = "0 5px 15px rgba(0,0,0,0.4)";
+            document.body.appendChild(btn);
+            return btn;
+        }
+
+        let start1 = createButton("Start Car 1", "80px");
+        let start2 = createButton("Start Car 2", "calc(100% - 220px)");
+
+        let pos1 = 0;
+        let pos2 = 0;
+        let moving1 = false;
+        let moving2 = false;
+        let interval;
+
+        start1.onclick = function () {
+            moving1 = true;
+            startMoving();
+        };
+
+        start2.onclick = function () {
+            moving2 = true;
+            startMoving();
+        };
+
+        function startMoving() {
+
+            if (interval) return;
+
+            interval = setInterval(function () {
+
+                if (moving1) {
+                    pos1 += 6;
+                    car1.style.left = pos1 + "px";
+                }
+
+                if (moving2) {
+                    pos2 += 6;
+                    car2.style.right = pos2 + "px";
+                }
+
+                detectCollision();
+
+            }, 30);
+        }
+
+        function detectCollision() {
+
+            let rect1 = car1.getBoundingClientRect();
+            let rect2 = car2.getBoundingClientRect();
+
+            if (rect1.right >= rect2.left) {
+                clearInterval(interval);
+                crashSequence(rect1, rect2);
+            }
+        }
+
+        function crashSequence(rect1, rect2) {
+
+            let flash = document.createElement("div");
+            flash.style.position = "fixed";
+            flash.style.top = "0";
+            flash.style.left = "0";
+            flash.style.width = "100%";
+            flash.style.height = "100%";
+            flash.style.background = "white";
+            flash.style.opacity = "0.8";
+            document.body.appendChild(flash);
+
+            setTimeout(() => flash.remove(), 100);
+
+            setTimeout(() => {
+
+                let collisionCenter = (rect1.right + rect2.left) / 2;
+
+                car1.style.display = "none";
+                car2.style.display = "none";
+                start1.style.display = "none";
+                start2.style.display = "none";
+
+                let crash = document.createElement("img");
+                crash.src = "crash.png";
+                crash.style.position = "absolute";
+                crash.style.width = "360px";
+                crash.style.left = (collisionCenter - 180) + "px";
+                crash.style.bottom = "400px";
+                document.body.appendChild(crash);
+
+                let shakeCount = 0;
+                let shake = setInterval(() => {
+                    document.body.style.transform =
+                        "translate(" + (shakeCount % 2 === 0 ? "-5px" : "5px") + ",0)";
+                    shakeCount++;
+                    if (shakeCount > 15) {
+                        clearInterval(shake);
+                        document.body.style.transform = "translate(0,0)";
+                        setTimeout(() => startFalling(crash), 700);
+                    }
+                }, 60);
+
+            }, 200);
+        }
+
+        function startFalling(crash) {
+
+            let fallInterval = setInterval(function () {
+
+                let currentBottom = parseInt(crash.style.bottom);
+
+                if (currentBottom > 60) {
+                    crash.style.bottom = (currentBottom - 12) + "px";
+                } else {
+                    crash.style.bottom = "60px";
+                    clearInterval(fallInterval);
+                    showMessage(crash);
+                }
+
+            }, 30);
+        }
+
+        function showMessage(crash) {
+
+            let crashBottom = parseInt(crash.style.bottom);
+
+            let message = document.createElement("div");
+            message.innerText = "🚨 Accident Happened! Get Insurance Now!";
+            message.style.position = "absolute";
+            message.style.bottom = (crashBottom + 200) + "px";
+            message.style.width = "100%";
+            message.style.textAlign = "center";
+            message.style.color = "red";
+            message.style.fontSize = "26px";
+            message.style.fontWeight = "bold";
+            message.style.textShadow = "0 0 15px orange";
+            message.style.opacity = "0";
+            document.body.appendChild(message);
+
+            let opacity = 0;
+            let fade = setInterval(function () {
+                opacity += 0.05;
+                message.style.opacity = opacity;
+                if (opacity >= 1) clearInterval(fade);
+            }, 50);
+
+            let restart = document.createElement("button");
+            restart.innerText = "Restart Simulation";
+            restart.style.position = "absolute";
+            restart.style.bottom = (crashBottom + 160) + "px";
+            restart.style.left = "50%";
+            restart.style.transform = "translateX(-50%)";
+            restart.style.padding = "10px 22px";
+            restart.style.border = "none";
+            restart.style.borderRadius = "25px";
+            restart.style.background = "red";
+            restart.style.color = "white";
+            restart.style.cursor = "pointer";
+            document.body.appendChild(restart);
+
+            restart.onclick = function () {
+                location.reload();
+            };
+        }
+
+    </script>
+
+</body>
+
+</html>
