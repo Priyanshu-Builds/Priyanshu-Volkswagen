@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+.container {
+  text-align: center;
+  padding: 30px;
+}
+
+h1 {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.preview img {
+  width: 450px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.4s ease-in-out;
+}
+
+.preview h2 {
+  margin-top: 15px;
+  font-size: 26px;
+}
+
+.preview p {
+  font-size: 16px;
+  color: #555;
+}
+
+.main-image {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.thumbnails {
+  margin-top: 30px;
+}
+
+.thumbnails img {
+  width: 130px;
+  height: 90px;
+  object-fit: cover;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.thumbnails img:hover {
+  transform: scale(1.1);
+}
+
+.thumbnails img.active {
+  border: 3px solid #007bff;
+  transform: scale(1.1);
+}
