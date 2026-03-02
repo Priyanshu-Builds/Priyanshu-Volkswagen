@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Names in Uppercase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            text-align: center;
+            padding-top: 50px;
+        }
+        h1 {
+            color: #58d65c;
+        }
+        .name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4cdada;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Names in Uppercase</h1>
+
+    {% for name in names %}
+        <p class="name">{{ name }}</p>
+    {% endfor %}
+
+</body>
+</html>

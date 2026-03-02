@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comments</title>
+    <style>
+        body { font-family: Arial; padding: 30px; background: #f4f6f9; }
+        .box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: white;
+        }
+        .flagged {
+            border-left: 6px solid red;
+            background-color: #ffe6e6;
+        }
+        .badge {
+            background: green;
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+        .long {
+            background: orange;
+            color: white;
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+        .stats {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>User Comments</h2>
+
+{% for c in comments %}
+<div class="box {% if c.flagged %}flagged{% endif %}">
+
+    <strong>{{ c.username | upper }}</strong>
+
+    <p>{{ c.comment | trim }}</p>
+
+    <p>Likes: {{ c.likes }}</p>
+
+    {% if c.likes > 100 %}
+        <span class="badge">Trending</span>
+    {% endif %}
+
+    {% if c.comment | length > 200 %}
+        <span class="long">Long Post</span>
+    {% endif %}
+
+</div>
+{% endfor %}
+
+<div class="stats">
+    <h3>Statistics</h3>
+    <p>Total Comments: {{ total_comments }}</p>
+    <p>Total Flagged: {{ total_flagged }}</p>
+    <p>Most Liked: {{ most_liked.username }} ({{ most_liked.likes }} likes)</p>
+    <p>All Users: {{ usernames_joined }}</p>
+</div>
+
+</body>
+</html>
