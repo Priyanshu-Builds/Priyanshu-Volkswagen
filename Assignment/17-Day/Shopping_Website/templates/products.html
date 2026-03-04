@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Our Products</h1>
+    <p>Discover our curated collection of premium tech</p>
+</div>
+<div class="products-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <div class="product-emoji">{{ product.image }}</div>
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-desc">{{ product.description }}</p>
+        <p class="product-price">₹{{ "%.0f"|format(product.price) }}</p>
+        <form action="{{ url_for('products.add_to_cart', product_name=product.name) }}" method="POST">
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

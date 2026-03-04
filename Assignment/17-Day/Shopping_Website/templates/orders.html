@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Your Orders</h1>
+    <p>Track your order history</p>
+</div>
+
+{% if orders %}
+    {% for order in orders %}
+    <div class="order-card">
+        <h3>Order #{{ order['id'] }}</h3>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order['items'] %}
+                <tr>
+                    <td>{{ item['image'] }} {{ item['name']|capitalize }}</td>
+                    <td>₹{{ "%.0f"|format(item['price']) }}</td>
+                    <td>{{ item['quantity'] }}</td>
+                    <td>₹{{ "%.0f"|format(item['price'] * item['quantity']) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="order-total">Order Total: <strong>₹{{ "%.0f"|format(order['total']) }}</strong></p>
+    </div>
+    {% endfor %}
+{% else %}
+<div class="empty-state">
+    <h2>No Orders Yet</h2>
+    <p>You haven't placed any orders yet.</p>
+    <a href="{{ url_for('products.index') }}" class="btn btn-primary">Start Shopping</a>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block body %}
+<div class="dashboard-wrapper">
+    <nav class="dashboard-nav">
+        <span class="nav-brand">Company Portal</span>
+        <div class="nav-user">
+            <span class="user-name">{{ username }}</span>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout">Logout</a>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, <strong>{{ username }}</strong>!</p>
+        <p>Role: <strong>{{ role }}</strong></p>
+    </main>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🛍️ MiniShop</div>
+        <div class="nav-links">
+            <a href="{{ url_for('products.index') }}" class="nav-link">Products</a>
+            <a href="{{ url_for('cart.view_cart') }}" class="nav-link">🛒 Cart</a>
+            <a href="{{ url_for('orders.view_orders') }}" class="nav-link">📦 Orders</a>
+        </div>
+    </nav>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
