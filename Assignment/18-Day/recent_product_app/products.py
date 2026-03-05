@@ -3,20 +3,17 @@ import json
 
 products_bp = Blueprint('products', __name__, url_prefix='/products')
 
-# Example dataset
 products = [
     {"id": 1, "name": "Laptop", "price": 70000},
     {"id": 2, "name": "Mouse", "price": 500},
     {"id": 3, "name": "Keyboard", "price": 1200}
 ]
 
-# API 2: Get all products
 @products_bp.route('/', methods=['GET'])
 def get_products():
     return jsonify(products)
 
 
-# API 3: View product
 @products_bp.route('/<int:product_id>', methods=['GET'])
 def view_product(product_id):
 
@@ -28,7 +25,6 @@ def view_product(product_id):
     if not product:
         return jsonify({"error": "Product not found"}), 404
 
-    # Get cookie
     recent = request.cookies.get("recent_products")
 
     if recent:
@@ -39,7 +35,6 @@ def view_product(product_id):
     if product_id not in recent:
         recent.append(product_id)
 
-    # keep only last 5
     recent = recent[-5:]
 
     response = make_response(jsonify(product))
@@ -48,7 +43,6 @@ def view_product(product_id):
     return response
 
 
-# API 4: Get recently viewed products
 @products_bp.route('/recent', methods=['GET'])
 def recent_products():
 

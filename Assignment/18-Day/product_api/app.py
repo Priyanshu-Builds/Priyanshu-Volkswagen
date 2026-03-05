@@ -5,7 +5,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# product storage
 products = []
 
 @app.route('/upload', methods=['POST'])
