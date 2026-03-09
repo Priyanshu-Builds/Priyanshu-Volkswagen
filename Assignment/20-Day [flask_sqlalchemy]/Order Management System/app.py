@@ -6,7 +6,7 @@ app = Flask(__name__)
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'Priyanshu02',
+    'password': 'Priyanshu',
     'database': 'order_management'
 }
 
@@ -14,7 +14,7 @@ def get_db():
     return mysql.connector.connect(**db_config)
 
 def init_db():
-    conn = mysql.connector.connect(host='localhost', user='root', password='Priyanshu02')
+    conn = mysql.connector.connect(host='localhost', user='root', password='Priyanshu')
     cursor = conn.cursor()
     cursor.execute("CREATE DATABASE IF NOT EXISTS order_management")
     cursor.close()

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Library Management System</h1>
+    <nav>
+        <a href="{{ url_for('index') }}">All Books</a>
+        <a href="{{ url_for('add_book') }}">Add Book</a>
+        <a href="{{ url_for('unavailable_books') }}">Unavailable Books</a>
+    </nav>
+
+    <h2>All Books</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Copies</th>
+            <th>Action</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.id }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.copies }}</td>
+            <td>
+                {% if book.copies > 0 %}
+                    <a href="{{ url_for('borrow_book', book_id=book.id) }}">Borrow</a>
+                {% else %}
+                    <span class="unavailable">Not Available</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
