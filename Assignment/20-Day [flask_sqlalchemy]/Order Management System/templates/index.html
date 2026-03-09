@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Order Management System</h1>
+    <nav>
+        <a href="{{ url_for('index') }}">All Orders</a>
+        <a href="{{ url_for('add_order') }}">Add Order</a>
+        <a href="{{ url_for('high_revenue') }}">Revenue &gt; 2000</a>
+    </nav>
+
+    <h2>All Orders</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Revenue</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.product_name }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.price }}</td>
+            <td>{{ order.revenue }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Total Revenue: {{ total_revenue }}</h3>
+</body>
+</html>

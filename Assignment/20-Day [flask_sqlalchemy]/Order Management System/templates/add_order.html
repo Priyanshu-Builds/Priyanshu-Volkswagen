@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Order</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Order Management System</h1>
+    <nav>
+        <a href="{{ url_for('index') }}">All Orders</a>
+        <a href="{{ url_for('add_order') }}">Add Order</a>
+        <a href="{{ url_for('high_revenue') }}">Revenue &gt; 2000</a>
+    </nav>
+
+    <h2>Add New Order</h2>
+    <form method="POST">
+        <label>Product Name:</label><br>
+        <input type="text" name="product_name" required><br><br>
+        <label>Quantity:</label><br>
+        <input type="number" name="quantity" required><br><br>
+        <label>Price:</label><br>
+        <input type="number" step="0.01" name="price" required><br><br>
+        <button type="submit">Add Order</button>
+    </form>
+</body>
+</html>
