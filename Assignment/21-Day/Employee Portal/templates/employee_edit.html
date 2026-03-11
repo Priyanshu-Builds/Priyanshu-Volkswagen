@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Edit {{ employee.name }} - Employee Portal{% endblock %}
+{% block content %}
+<div class="form-container">
+    <h1>Edit Employee</h1>
+    <form method="POST" action="{{ url_for('employee_edit', id=employee.id) }}">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="{{ employee.name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ employee.email }}" required>
+        </div>
+        <div class="form-group">
+            <label for="department">Department</label>
+            <input type="text" id="department" name="department" value="{{ employee.department }}" required>
+        </div>
+        {% if session.get('role') == 'admin' %}
+        <div class="form-group">
+            <label for="role">Role</label>
+            <select id="role" name="role">
+                <option value="admin" {% if employee.user and employee.user.role == 'admin' %}selected{% endif %}>Admin</option>
+                <option value="manager" {% if employee.user and employee.user.role == 'manager' %}selected{% endif %}>Manager</option>
+                <option value="employee" {% if employee.user and employee.user.role == 'employee' %}selected{% endif %}>Employee</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="manager_id">Manager</label>
+            <select id="manager_id" name="manager_id">
+                <option value="">None</option>
+                {% for emp in all_employees %}
+                <option value="{{ emp.id }}" {% if employee.manager_id == emp.id %}selected{% endif %}>{{ emp.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="{{ url_for('employee_profile', id=employee.id) }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
